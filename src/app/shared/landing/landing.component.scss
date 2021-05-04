@@ -1,0 +1,44 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.header {
+  padding: 0 2rem;
+  overflow: hidden;
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    .logo__image {
+      height: 2rem;
+    }
+
+    .logo__text {
+      margin-top: 0.5rem;
+      font-weight: 500;
+      font-size: 1.025rem;
+      letter-spacing: 0.08rem;
+      height: 100%;
+      line-height: 0.08rem;
+
+      @media only screen and (max-width: 600px) {
+        display: none;
+      }
+    }
+  }
+}
+
+.card__container {
+  margin-top: 5rem;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  .card {
+    img {
+      height: 10rem;
+    }
+  }
+}

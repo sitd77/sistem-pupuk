@@ -1,0 +1,73 @@
+<div class="landing__container">
+  <!-- header -->
+  <!--The content below is only a placeholder and can be replaced.-->
+  <mat-toolbar color="primary">
+    <mat-toolbar-row class="header">
+      <!--  <span>HOME</span> -->
+      <div class="logo">
+        <img src="assets/img/logo.png" alt="logo image" class="logo__image" />
+        <p class="logo__text">Sistem Distribusi Pupuk Kecamatan Matakali</p>
+      </div>
+      <span class="spacer"></span>
+      <a mat-button routerLink="/register" (click)="openDialogSignUp()">
+        <mat-icon aria-hidden="false" aria-label="Mat Icon"
+          >person_add</mat-icon
+        >
+
+        Register</a
+      >
+      <a mat-button routerLink="/login" (click)="openDialogSignIn()">
+        <mat-icon aria-hidden="false" aria-label="Mat Icon">people</mat-icon>
+        Login</a
+      >
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <!-- main content -->
+  <div class="card__container">
+    <mat-card class="card">
+      <img mat-card-image src="assets/img/card1.svg" alt="card image" />
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Toko Pupuk</mat-card-title>
+        <mat-card-subtitle>Kecamatan Matakali</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Menandai anggota kelompok tani yang sudah mengambil pupuk dari toko
+          persediaan pupuk.
+        </p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card">
+      <img mat-card-image src="assets/img/card2.svg" alt="card image" />
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Kelompok Tani</mat-card-title>
+        <mat-card-subtitle>Ketua Kelompok</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Mengupdate / mengentri data anggota kelompok tani kedalam sistem.</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card">
+      <img mat-card-image src="assets/img/card3.svg" alt="card image" />
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Shiba Inu</mat-card-title>
+        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          The Shiba Inu is the smallest of the six original and distinct spitz
+          breeds of dog from Japan. A small, agile dog that copes very well with
+          mountainous terrain, the Shiba Inu was originally bred for hunting.
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- footer -->
+</div>
