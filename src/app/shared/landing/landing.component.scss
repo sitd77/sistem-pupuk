@@ -36,9 +36,18 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  justify-content: center;
   .card {
+    width: 22rem;
     img {
       height: 10rem;
     }
   }
+}
+
+footer {
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  color: #aaa;
 }

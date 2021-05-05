@@ -15,9 +15,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { FormAnggotaComponent } from './form-anggota/form-anggota.component';
 
 @NgModule({
-  declarations: [LandingComponent, SignInComponent, SignUpComponent],
+  declarations: [LandingComponent, SignInComponent, SignUpComponent, FormAnggotaComponent],
   imports: [
     CommonModule,
 
@@ -37,6 +43,11 @@ import { MatCardModule } from '@angular/material/card';
     MatSelectModule,
     MatDividerModule,
     MatCardModule,
+    MatSidenavModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
   ],
   exports: [
     // export component's
@@ -62,6 +73,12 @@ import { MatCardModule } from '@angular/material/card';
     MatSelectModule,
     MatDividerModule,
     MatCardModule,
+    MatSidenavModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    FormAnggotaComponent,
   ],
 })
 export class SharedModule {}

@@ -20,11 +20,7 @@ export class LandingComponent implements OnInit {
   }
 
   openDialogSignUp() {
-    const dialogRef = this.dialog.open(SignUpComponent);
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
+    this.dialog.open(SignUpComponent);
   }
 
   ngOnInit(): void {}

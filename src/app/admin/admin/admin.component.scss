@@ -1,0 +1,78 @@
+// @import "../../../assets/scss/main";
+
+.admin__container {
+  display: grid;
+
+  grid-template-rows: 0.2fr 8.2fr 0.15fr;
+  grid-template-areas: "header" "content" "footer";
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.header {
+  grid-area: header;
+}
+
+app-sidenav {
+  display: flex;
+}
+mat-drawer-container {
+  flex: 1 1 auto;
+}
+
+mat-drawer {
+  min-width: 300px;
+  padding-top: 1rem !important;
+  padding: 0 2rem;
+  // display: flex !important;
+  // justify-content: center !important;
+  // align-items: center !important;
+  > * {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.sidebar__logo {
+  height: 7rem;
+}
+
+.user__name {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: rgb(63, 89, 70);
+  letter-spacing: 1px;
+}
+
+.user__role {
+  margin-top: 0.1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: grey;
+  letter-spacing: 0.5px;
+}
+
+.footer {
+  grid-area: footer;
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  color: grey;
+}
+
+.content {
+  grid-area: content;
+  padding: 1.5rem 1rem;
+  overflow: hidden auto;
+}
+
+.link {
+  color: grey;
+  &.active {
+    color: teal;
+    background: rgba(teal, 0.05);
+  }
+}

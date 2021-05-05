@@ -1,1 +1,93 @@
-<p>admin works!</p>
+<mat-drawer-container [hasBackdrop]="false">
+  <mat-drawer #drawer color="primary" mode="push">
+    <!-- logo ilustration -->
+    <img src="assets/img/logo.png" alt="logo image" class="sidebar__logo" />
+    <!-- username -->
+    <p class="user__name" *ngIf="currentUser">{{ currentUser.nama }}</p>
+    <p class="user__role" *ngIf="currentUser">
+      {{ listUserTipe[currentUser.role - 1] }}
+    </p>
+
+    <mat-divider></mat-divider>
+
+    <mat-nav-list fxLayout="column" class="links" *ngIf="currentUser">
+      <h3 matSubheader>Menu</h3>
+      <a
+        mat-list-item
+        class="link"
+        [routerLink]="['dashboard']"
+        [routerLinkActive]="'active'"
+      >
+        <mat-icon matListIcon>dashboard</mat-icon>
+        <span matLine>Dashboard</span>
+      </a>
+      <a
+        mat-list-item
+        class="link"
+        [routerLink]="['anggota-kelompok']"
+        [routerLinkActive]="'active'"
+        *ngIf="currentUser.role == 3"
+      >
+        <mat-icon matListIcon>people</mat-icon>
+        <span matLine>Anggota Kelompok Tani</span>
+      </a>
+      <a
+        mat-list-item
+        class="link"
+        [routerLink]="['pengajuan']"
+        [routerLinkActive]="'active'"
+        *ngIf="currentUser.role == 1"
+      >
+        <mat-icon matListIcon>assessment</mat-icon>
+        <span matLine>Pengajuan</span>
+      </a>
+      <a
+        mat-list-item
+        class="link"
+        [routerLink]="['distribusi-pupuk']"
+        [routerLinkActive]="'active'"
+        *ngIf="currentUser.role == 2"
+      >
+        <mat-icon matListIcon>note_add</mat-icon>
+        <span matLine>Distribusi Pupuk</span>
+      </a>
+      <h3 matSubheader>Lainnya</h3>
+      <a
+        mat-list-item
+        class="link"
+        [routerLink]="['profil']"
+        [routerLinkActive]="'active'"
+      >
+        <mat-icon matListIcon>person</mat-icon>
+        <span matLine>Profil</span>
+      </a>
+      <button mat-raised-button color="accent" (click)="authService.logout()">
+        <mat-icon>logout</mat-icon>
+        <span matLine>Logout</span>
+      </button>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content class="admin__container">
+    <!-- header -->
+    <mat-toolbar class="header" color="primary">
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-icon-button color="accent" (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <p matLine>Sistem Distribusi Pupuk</p>
+        <button mat-icon-button color="accent" (click)="authService.logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <!-- content -->
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+
+    <!-- footer -->
+    <footer class="footer">
+      <p class="footer__text">Copyright &copy; 2021 ua4ever, Inc.</p>
+    </footer>
+  </mat-drawer-content>
+</mat-drawer-container>

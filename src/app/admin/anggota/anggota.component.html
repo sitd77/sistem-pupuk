@@ -1,0 +1,87 @@
+<div id="anggota__container" fxLayout="column">
+  <div class="mat-info" fxLayout="row" fxLayoutAlign="space-between flex-start">
+    <h2>Daftar Anggota Kelompok Tani</h2>
+    <button mat-raised-button color="primary" (click)="openDialog()">
+      <mat-icon>person_add</mat-icon>
+      <span>Tambah Anggota</span>
+    </button>
+  </div>
+  <div class="mat-elevation-z2">
+    <table mat-table [dataSource]="dataSource">
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let item; let i = index">{{ i + 1 }}</td>
+        <th mat-footer-cell *matFooterCellDef>#</th>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="nama">
+        <th mat-header-cell *matHeaderCellDef>Nama Anggota</th>
+        <td mat-cell *matCellDef="let item">{{ item.nama }}</td>
+        <th align="left" mat-footer-cell *matFooterCellDef>Total Luas Lahan</th>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="nik">
+        <th mat-header-cell *matHeaderCellDef>NIK / No. KTP</th>
+        <td mat-cell *matCellDef="let item">{{ item.nik }}</td>
+        <th mat-footer-cell *matFooterCellDef></th>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="alamat">
+        <th mat-header-cell *matHeaderCellDef>Alamat</th>
+        <td mat-cell *matCellDef="let item">{{ item.alamat }}</td>
+        <th mat-footer-cell *matFooterCellDef></th>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="luas_lahan">
+        <th mat-header-cell *matHeaderCellDef>Luas Lahan (M<sup>2</sup>)</th>
+        <td mat-cell *matCellDef="let item">
+          {{ item.luas_lahan }} M<sup>2</sup>
+        </td>
+        <th align="left" mat-footer-cell *matFooterCellDef>
+          {{ totalLuasLahan }} M<sup>2</sup>
+        </th>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Status Keanggotaan</th>
+        <td mat-cell *matCellDef="let item">
+          {{ getLevelAnggota(item.role) }}
+        </td>
+        <th mat-footer-cell *matFooterCellDef></th>
+      </ng-container>
+
+      <!-- aksi / option -->
+      <ng-container matColumnDef="aksi">
+        <th mat-header-cell *matHeaderCellDef>Aksi / Opsi</th>
+        <td mat-cell *matCellDef="let item">
+          <button mat-icon-button color="primary" (click)="edit(item)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="accent"
+            (click)="service.deleteData(item.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+        <th mat-footer-cell *matFooterCellDef></th>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -21,7 +22,11 @@ export class SignInComponent implements OnInit {
    * @param fb
    * @param authService
    */
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    public dialogRef: MatDialogRef<SignInComponent>
+  ) {}
 
   /**
    * init component
@@ -38,6 +43,11 @@ export class SignInComponent implements OnInit {
         Validators.minLength(8),
       ]),
     });
+
+    this.form.patchValue({
+      email: 'siamasei@gmail.com',
+      password: '12345678',
+    });
   }
 
   /**
@@ -51,7 +61,8 @@ export class SignInComponent implements OnInit {
       const email = formValue['email'];
       const password = formValue['password'];
 
-      this.authService.login(email, password);
+      await this.authService.login(email, password);
+      this.dialogRef.close();
     }
   }
 
