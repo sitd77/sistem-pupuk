@@ -24,8 +24,9 @@ export class AnggotaComponent implements AfterViewInit, OnDestroy, OnInit {
     'nama',
     'nik',
     'alamat',
-    'luas_lahan',
     'role',
+    'status_kartu',
+    'luas_lahan',
     'aksi',
   ];
 
@@ -42,6 +43,16 @@ export class AnggotaComponent implements AfterViewInit, OnDestroy, OnInit {
       'KETUA',
     ];
     return listAnggotaRole[role - 1];
+  }
+
+  getStatusKartu(status: number): string {
+    const listStatusKartu: string[] = [
+      'BELUM ADA',
+      'SEDANG DIPROSES',
+      'SUDAH ADA',
+    ];
+
+    return listStatusKartu[status - 1];
   }
 
   /**

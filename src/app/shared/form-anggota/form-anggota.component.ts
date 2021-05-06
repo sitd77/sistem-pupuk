@@ -71,6 +71,7 @@ export class FormAnggotaComponent implements OnInit, OnDestroy {
         Validators.pattern('^[0-9.]*$'),
       ]),
       role: new FormControl(1, [Validators.required]),
+      status_kartu: new FormControl(1, [Validators.required]),
     });
 
     if (this.data) {
@@ -126,5 +127,9 @@ export class FormAnggotaComponent implements OnInit, OnDestroy {
 
   get role(): FormControl {
     return this.form.get('role') as FormControl;
+  }
+
+  get status_kartu(): FormControl {
+    return this.form.get('status_kartu') as FormControl;
   }
 }

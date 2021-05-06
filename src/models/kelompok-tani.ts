@@ -6,6 +6,13 @@ export enum AnggotaRole {
   SEKRETARIS = 3,
   KETUA = 4,
 }
+
+export enum StatusKartu {
+  TIDAK = 1,
+  DIPROSES = 2,
+  ADA = 3,
+}
+
 // anggota kelompok tani
 export class AnggotaKelompokModel {
   id?: string;
@@ -16,4 +23,5 @@ export class AnggotaKelompokModel {
   alamat: string;
   luas_lahan: number;
   role: AnggotaRole = AnggotaRole.ANGGOTA;
+  status_kartu: StatusKartu = StatusKartu.TIDAK;
 }

@@ -60,6 +60,24 @@
       </mat-select>
       <mat-error *ngIf="role.hasError('required')">Wajib dipilih</mat-error>
     </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Status Kartu</mat-label>
+      <mat-select formControlName="status_kartu">
+        <mat-option
+          *ngFor="
+            let status_kartu of ['BELUM ADA', 'SEDANG DIPROSES', 'SUDAH ADA'];
+            let i = index
+          "
+          [value]="i + 1"
+        >
+          {{ status_kartu }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="status_kartu.hasError('required')"
+        >Wajib dipilih</mat-error
+      >
+    </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions align="center">
     <button mat-raised-button color="primary" type="submit">
