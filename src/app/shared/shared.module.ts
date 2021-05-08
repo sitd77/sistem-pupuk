@@ -1,3 +1,4 @@
+import { HargaPupukComponent } from './harga-pupuk/harga-pupuk.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -21,9 +22,19 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { FormAnggotaComponent } from './form-anggota/form-anggota.component';
+import { FormPermohonanComponent } from './form-permohonan/form-permohonan.component';
+import { NodataWidgetComponent } from './nodata-widget/nodata-widget.component';
 
 @NgModule({
-  declarations: [LandingComponent, SignInComponent, SignUpComponent, FormAnggotaComponent],
+  declarations: [
+    LandingComponent,
+    SignInComponent,
+    SignUpComponent,
+    FormAnggotaComponent,
+    FormPermohonanComponent,
+    NodataWidgetComponent,
+    HargaPupukComponent,
+  ],
   imports: [
     CommonModule,
 
@@ -79,6 +90,9 @@ import { FormAnggotaComponent } from './form-anggota/form-anggota.component';
     MatSortModule,
     MatTableModule,
     FormAnggotaComponent,
+    FormPermohonanComponent,
+    NodataWidgetComponent,
+    HargaPupukComponent,
   ],
 })
 export class SharedModule {}

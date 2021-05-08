@@ -1,1 +1,71 @@
-<p>permohonan works!</p>
+<div
+  class="permohonan__container"
+  fxLayout="column"
+  *ngIf="listKelompokTani.length; else nodata"
+>
+  <!-- item kelompok tani -->
+  <div
+    class="kelompok__tani__item"
+    fxLayout="column"
+    *ngFor="let item of listKelompokTani"
+  >
+    <!-- title -->
+    <p class="title">Kelompok Tani {{ item.nama }}</p>
+    <!-- table untuk masing-masing kelompok -->
+    <div class="mat-elevation-z2">
+      <table mat-table>
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <td mat-cell *matCellDef="let item; let i = index">{{ i + 1 }}</td>
+          <th mat-footer-cell *matFooterCellDef>#</th>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="nama">
+          <th mat-header-cell *matHeaderCellDef>Nama Anggota</th>
+          <td mat-cell *matCellDef="let item">{{ item.nama }}</td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            Total Luas Lahan
+          </th>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="nik">
+          <th mat-header-cell *matHeaderCellDef>NIK / No. KTP</th>
+          <td mat-cell *matCellDef="let item">{{ item.nik }}</td>
+          <th mat-footer-cell *matFooterCellDef></th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="alamat">
+          <th mat-header-cell *matHeaderCellDef>Alamat</th>
+          <td mat-cell *matCellDef="let item">{{ item.alamat }}</td>
+          <th mat-footer-cell *matFooterCellDef></th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="luas_lahan">
+          <th mat-header-cell *matHeaderCellDef>Luas Lahan (Ha)</th>
+          <td mat-cell *matCellDef="let item">{{ item.luas_lahan }} Ha</td>
+          <th align="left" mat-footer-cell *matFooterCellDef>0 Ha</th>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+      </table>
+
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </div>
+</div>
+
+<!-- nodata widget -->
+<ng-template #nodata>
+  <!-- no data -->
+  <app-nodata-widget></app-nodata-widget>
+</ng-template>

@@ -45,7 +45,7 @@ export class SignInComponent implements OnInit {
     });
 
     this.form.patchValue({
-      email: 'siamasei@gmail.com',
+      email: 'dinas@gmail.com',
       password: '12345678',
     });
   }

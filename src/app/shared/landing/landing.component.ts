@@ -1,3 +1,4 @@
+import { HargaPupukComponent } from './../harga-pupuk/harga-pupuk.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SignInComponent } from '../sign-in/sign-in.component';
@@ -21,6 +22,10 @@ export class LandingComponent implements OnInit {
 
   openDialogSignUp() {
     this.dialog.open(SignUpComponent);
+  }
+
+  openHargaPupuk() {
+    this.dialog.open(HargaPupukComponent);
   }
 
   ngOnInit(): void {}

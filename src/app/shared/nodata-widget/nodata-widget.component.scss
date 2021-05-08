@@ -1,0 +1,19 @@
+.nodata__container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+
+  .nodata__text {
+    font-size: 0.8625rem;
+    color: grey;
+    font-weight: 600;
+  }
+
+  .nodata__image {
+    height: 10rem;
+  }
+}

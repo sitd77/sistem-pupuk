@@ -1,0 +1,39 @@
+<div mat-dialog-container fxLayout="column">
+  <h2 mat-dialog-title>Harga Pupuk</h2>
+  <mat-dialog-content
+    class="mat-typography"
+    fxLayout="column"
+    fxLayoutAlign="space-between"
+  >
+    <p>Permentan No. 49 Tahun 2020, 30 Desember 2020</p>
+
+    <table mat-table [dataSource]="dataSource">
+      <!-- Name Column -->
+      <ng-container matColumnDef="jenis">
+        <th mat-header-cell *matHeaderCellDef>Jenis Pupuk</th>
+        <td mat-cell *matCellDef="let item">{{ item.pupuk }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="perkg">
+        <th mat-header-cell *matHeaderCellDef>PER Kg.</th>
+        <td mat-cell *matCellDef="let item">Rp.{{ item.perkg }}, -</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="perkarung">
+        <th mat-header-cell *matHeaderCellDef>PER KARUNG</th>
+        <td mat-cell *matCellDef="let item">Rp.{{ item.perkarung }}, -</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-dialog-content>
+  <mat-dialog-actions align="center">
+    <button mat-raised-button mat-dialog-close color="accent">
+      <mat-icon>close</mat-icon>
+      Tutup
+    </button>
+  </mat-dialog-actions>
+</div>
