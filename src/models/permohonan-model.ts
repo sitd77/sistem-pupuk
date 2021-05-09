@@ -2,6 +2,8 @@ import { UserModel } from './user-model';
 import firebase from 'firebase';
 
 import { AnggotaKelompokModel } from './kelompok-tani';
+import { FormGroup } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface IPupuk {
   total: number;
@@ -81,4 +83,26 @@ export class PermohonanPupukModel {
   deskripsi: string = '';
   data: DistribusiPupukModel[] = [];
   kelompok_id: string;
+}
+
+export interface IPermohonan {
+  kelompok: UserModel;
+  datasource: MatTableDataSource<DistribusiPupukModel>;
+  total_luas: number;
+  urea_mt1: number;
+  urea_mt2: number;
+  urea_mt3: number;
+  sp36_mt1: number;
+  sp36_mt2: number;
+  sp36_mt3: number;
+  za_mt1: number;
+  za_mt2: number;
+  za_mt3: number;
+  npk_mt1: number;
+  npk_mt2: number;
+  npk_mt3: number;
+  organik_mt1: number;
+  organik_mt2: number;
+  organik_mt3: number;
+  form: FormGroup;
 }

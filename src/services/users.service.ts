@@ -20,4 +20,27 @@ export class UsersService {
       )
       .valueChanges({ idField: 'id' }) as Observable<UserModel[]>;
   }
+
+  async getListKelompokTani(): Promise<UserModel[]> {
+    let listUser: UserModel[] = [];
+
+    const req = await this.firestore
+      .collection(this.collection)
+      .get()
+      .toPromise();
+    if (req.size > 0) {
+      await Promise.all(
+        req.docs.map(async (doc) => {
+          const data: UserModel = doc.data() as UserModel;
+          data.id = doc.id;
+
+          if (data.role == UserRole.KELOMPOK_TANI) {
+            listUser.push(data);
+          }
+        })
+      );
+    }
+
+    return listUser;
+  }
 }

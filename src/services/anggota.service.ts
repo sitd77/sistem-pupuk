@@ -31,6 +31,31 @@ export class AnggotaService {
   }
 
   /**
+   * dapatkan daftar anggota kelompok tani berdasarkan id kelompok
+   * @param kelompokID
+   * @returns
+   */
+  async getAnggotaByIDKelompok(
+    kelompokID: string
+  ): Promise<AnggotaKelompokModel[]> {
+    let listData: AnggotaKelompokModel[] = [];
+    const req = await this.firestore
+      .collection(this.collection, (ref) =>
+        ref.where('kelompok_id', '==', kelompokID)
+      )
+      .get()
+      .toPromise();
+    if (req.size > 0) {
+      req.forEach((anggota) => {
+        const data = anggota.data() as AnggotaKelompokModel;
+        data.id = anggota.id;
+        listData.push(data);
+      });
+    }
+    return listData;
+  }
+
+  /**
    * penambahan data
    * @param model
    */

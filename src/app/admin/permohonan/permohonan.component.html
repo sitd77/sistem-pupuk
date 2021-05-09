@@ -1,21 +1,30 @@
 <div
   class="permohonan__container"
   fxLayout="column"
-  *ngIf="listKelompokTani.length; else nodata"
+  *ngIf="currentListData.length; else nodata"
 >
   <!-- item kelompok tani -->
   <div
     class="kelompok__tani__item"
     fxLayout="column"
-    *ngFor="let item of listKelompokTani"
+    *ngFor="let permohonan of currentListData"
   >
     <!-- title -->
-    <p class="title">Kelompok Tani {{ item.nama }}</p>
+    <div class="row" fxLayout="row" fxLayoutAlign="space-between">
+      <p class="title">Kelompok Tani {{ permohonan.kelompok.nama }}</p>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="submitForm(permohonan)"
+      >
+        <mat-icon>save</mat-icon> Simpan Data
+      </button>
+    </div>
     <!-- table untuk masing-masing kelompok -->
-    <div class="mat-elevation-z2">
-      <table mat-table>
+    <form class="mat-elevation-z2 table-container" autocomplete="off">
+      <table mat-table [dataSource]="permohonan.datasource">
         <!-- Position Column -->
-        <ng-container matColumnDef="position">
+        <ng-container matColumnDef="nomor">
           <th mat-header-cell *matHeaderCellDef>No.</th>
           <td mat-cell *matCellDef="let item; let i = index">{{ i + 1 }}</td>
           <th mat-footer-cell *matFooterCellDef>#</th>
@@ -24,31 +33,292 @@
         <!-- Name Column -->
         <ng-container matColumnDef="nama">
           <th mat-header-cell *matHeaderCellDef>Nama Anggota</th>
-          <td mat-cell *matCellDef="let item">{{ item.nama }}</td>
-          <th align="left" mat-footer-cell *matFooterCellDef>
-            Total Luas Lahan
-          </th>
+          <td mat-cell *matCellDef="let item">{{ item.anggota.nama }}</td>
+          <th align="left" mat-footer-cell *matFooterCellDef>Total</th>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="nik">
           <th mat-header-cell *matHeaderCellDef>NIK / No. KTP</th>
-          <td mat-cell *matCellDef="let item">{{ item.nik }}</td>
-          <th mat-footer-cell *matFooterCellDef></th>
+          <td mat-cell *matCellDef="let item">{{ item.anggota.nik }}</td>
+          <th align="left" mat-footer-cell *matFooterCellDef></th>
         </ng-container>
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="alamat">
-          <th mat-header-cell *matHeaderCellDef>Alamat</th>
-          <td mat-cell *matCellDef="let item">{{ item.alamat }}</td>
-          <th mat-footer-cell *matFooterCellDef></th>
-        </ng-container>
-
-        <!-- Symbol Column -->
+        <!-- Weight Column -->
         <ng-container matColumnDef="luas_lahan">
-          <th mat-header-cell *matHeaderCellDef>Luas Lahan (Ha)</th>
-          <td mat-cell *matCellDef="let item">{{ item.luas_lahan }} Ha</td>
-          <th align="left" mat-footer-cell *matFooterCellDef>0 Ha</th>
+          <th mat-header-cell *matHeaderCellDef>Rencana Tanam (Ha)</th>
+          <td mat-cell *matCellDef="let item">
+            {{ item.anggota.luas_lahan }} Ha
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.total_luas }} Ha
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="urea_mt1">
+          <th mat-header-cell *matHeaderCellDef>UREA mt1</th>
+          <td mat-cell *matCellDef="let item">
+            <mat-form-field>
+              <input
+                type="text"
+                name="urea_mt1{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.urea_mt1.total"
+              />
+            </mat-form-field>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.urea_mt1 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="urea_mt2">
+          <th mat-header-cell *matHeaderCellDef>UREA mt2</th>
+          <td mat-cell *matCellDef="let item">
+            <mat-form-field>
+              <input
+                type="text"
+                name="urea_mt2{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.urea_mt2.total"
+              />
+            </mat-form-field>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.urea_mt2 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="urea_mt3">
+          <th mat-header-cell *matHeaderCellDef>UREA mt3</th>
+          <td mat-cell *matCellDef="let item">
+            <mat-form-field>
+              <input
+                type="text"
+                name="urea_mt3{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.urea_mt3.total"
+              />
+            </mat-form-field>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.urea_mt3 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="sp36_mt1">
+          <th mat-header-cell *matHeaderCellDef>SP36 mt1</th>
+          <td mat-cell *matCellDef="let item">
+            <mat-form-field>
+              <input
+                type="text"
+                name="sp36_mt1{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.sp36_mt1.total"
+              />
+            </mat-form-field>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.sp36_mt1 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="sp36_mt2">
+          <th mat-header-cell *matHeaderCellDef>SP36 mt2</th>
+          <td mat-cell *matCellDef="let item">
+            <mat-form-field>
+              <input
+                type="text"
+                name="sp36_mt2{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.sp36_mt2.total"
+              />
+            </mat-form-field>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.sp36_mt2 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="sp36_mt3">
+          <th mat-header-cell *matHeaderCellDef>SP36 mt3</th>
+          <td mat-cell *matCellDef="let item">
+            <mat-form-field>
+              <input
+                type="text"
+                name="sp36_mt3{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.sp36_mt3.total"
+              />
+            </mat-form-field>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.sp36_mt3 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="npk_mt1">
+          <th mat-header-cell *matHeaderCellDef>NPK mt1</th>
+          <td mat-cell *matCellDef="let item">
+            <mat-form-field>
+              <input
+                type="text"
+                name="npk_mt1{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.npk_mt1.total"
+              />
+            </mat-form-field>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.npk_mt1 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="npk_mt2">
+          <th mat-header-cell *matHeaderCellDef>NPK mt2</th>
+          <td mat-cell *matCellDef="let item">
+            <mat-form-field>
+              <input
+                type="text"
+                name="npk_mt2{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.npk_mt2.total"
+              />
+            </mat-form-field>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.npk_mt2 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="npk_mt3">
+          <th mat-header-cell *matHeaderCellDef>NPK mt3</th>
+          <td mat-cell *matCellDef="let item">
+            <mat-form-field>
+              <input
+                type="text"
+                name="npk_mt3{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.npk_mt3.total"
+              />
+            </mat-form-field>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.npk_mt3 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="za_mt1">
+          <th mat-header-cell *matHeaderCellDef>ZA mt1</th>
+          <td mat-cell *matCellDef="let item">
+            <mat-form-field>
+              <input
+                type="text"
+                name="za_mt1{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.za_mt1.total"
+              />
+            </mat-form-field>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.za_mt1 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="za_mt2">
+          <th mat-header-cell *matHeaderCellDef>ZA mt2</th>
+          <td mat-cell *matCellDef="let item">
+            <mat-form-field>
+              <input
+                type="text"
+                name="za_mt2{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.za_mt2.total"
+              />
+            </mat-form-field>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.za_mt2 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="za_mt3">
+          <th mat-header-cell *matHeaderCellDef>ZA mt3</th>
+          <td mat-cell *matCellDef="let item">
+            <mat-form-field>
+              <input
+                type="text"
+                name="za_mt3{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.za_mt3.total"
+              />
+            </mat-form-field>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.za_mt3 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="organik_mt1">
+          <th mat-header-cell *matHeaderCellDef>ORGANIK mt1</th>
+          <td mat-cell *matCellDef="let item">
+            <mat-form-field>
+              <input
+                type="text"
+                name="organik_mt1{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.organik_mt1.total"
+              />
+            </mat-form-field>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.organik_mt1 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="organik_mt2">
+          <th mat-header-cell *matHeaderCellDef>ORGANIK mt2</th>
+          <td mat-cell *matCellDef="let item">
+            <input
+              type="text"
+              name="organik_mt2{{ item.anggota.id }}"
+              matInput
+              [(ngModel)]="item.organik_mt2.total"
+            />
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.organik_mt2 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="organik_mt3">
+          <th mat-header-cell *matHeaderCellDef>ORGANIK mt3</th>
+          <td mat-cell *matCellDef="let item">
+            <input
+              type="text"
+              name="organik_mt3{{ item.anggota.id }}"
+              matInput
+              [(ngModel)]="item.organik_mt3.total"
+            />
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ permohonan.organik_mt3 }}
+          </th>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -60,7 +330,7 @@
         [pageSizeOptions]="[5, 10, 20]"
         showFirstLastButtons
       ></mat-paginator>
-    </div>
+    </form>
   </div>
 </div>
 
