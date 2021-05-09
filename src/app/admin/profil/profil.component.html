@@ -1,1 +1,67 @@
-<p>profil works!</p>
+<form
+  [formGroup]="form"
+  (ngSubmit)="submitForm()"
+  autocapitalize="off"
+  autocomplete="off"
+>
+  <h2 mat-dialog-title>Profil</h2>
+  <mat-dialog-content
+    class="mat-typography"
+    fxLayout="column"
+    fxLayoutAlign="space-between"
+  >
+    <p>
+      Anda bisa melakukan perubahan <strong>nama</strong> dan
+      <strong>alamat</strong>
+    </p>
+
+    <mat-form-field>
+      <mat-label>Email / Username</mat-label>
+      <input matInput type="text" formControlName="email" readonly />
+      <mat-error *ngIf="email.hasError('required')">Wajib diisi</mat-error>
+      <mat-error *ngIf="email.hasError('email') || email.hasError('minlength')"
+        >Email tidak valid</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" readonly />
+      <mat-error *ngIf="password.hasError('required')">Wajib diisi</mat-error>
+      <mat-error *ngIf="password.hasError('minlength')"
+        >Panjang password minimal 8 karakter</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Tipe Pengguna</mat-label>
+      <mat-select formControlName="role" [disabled]="true">
+        <mat-option
+          *ngFor="let role of listUserRole; let i = index"
+          [value]="i + 1"
+        >
+          {{ role }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="role.hasError('required')">Wajib dipilih</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nama</mat-label>
+      <input matInput type="text" formControlName="nama" />
+      <mat-error *ngIf="nama.hasError('required')">Wajib diisi</mat-error>
+      <mat-error *ngIf="nama.hasError('minlength')">Nama tidak valid</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Alamat</mat-label>
+      <textarea matInput type="text" formControlName="alamat"></textarea>
+      <mat-error *ngIf="alamat.hasError('required')">Wajib diisi</mat-error>
+      <mat-error *ngIf="alamat.hasError('minlength')"
+        >Alamat tidak valid</mat-error
+      >
+    </mat-form-field>
+  </mat-dialog-content>
+  <div class="actions" align="center">
+    <button mat-raised-button color="primary" type="submit">
+      <mat-icon>save</mat-icon>
+      Update Profil
+    </button>
+  </div>
+</form>

@@ -39,7 +39,7 @@ const routes: Routes = [
   // redirect
   {
     path: '',
-    redirectTo: 'pengajuan',
+    redirectTo: 'distribusi-pupuk',
     pathMatch: 'full',
   },
   {
