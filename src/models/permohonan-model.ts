@@ -10,6 +10,11 @@ export interface IPupuk {
   diambil: number;
 }
 
+export interface IResultDetail {
+  permohonan: IPermohonan;
+  distribusi: DistribusiPupukModel;
+}
+
 export class DistribusiPupukModel {
   id?: string;
   anggota?: AnggotaKelompokModel;

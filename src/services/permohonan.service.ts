@@ -50,7 +50,7 @@ export class PermohonanService {
       const dataAsJSObject = data.map((obj) => {
         return Object.assign({}, obj);
       });
-
+      // asynchronous firestore
       await this.firestore
         .collection(this._collection)
         .doc(permohonan.kelompok.id)
@@ -58,12 +58,16 @@ export class PermohonanService {
           data: dataAsJSObject,
         });
 
+      // log ketika sukses
       this.dialog.toastsuccess(
         'Entri data untuk kelompok tani ' +
           permohonan.kelompok.nama +
           ' berhasil.'
       );
+
+      // catch error jika ada
     } catch (error) {
+      // log error
       console.log(error);
       this.dialog.error(
         'Terjadi kesalahan saat entri data permohonan : ' + error
@@ -127,9 +131,8 @@ export class PermohonanService {
           // buat template variabel untuk menampung data permohonan dari kelompok tani
           let listDataPermohonan: DistribusiPupukModel[] = [];
           // ambil daftar anggota dari kelompok tani
-          const listAnggotaKelompok: AnggotaKelompokModel[] = await this.anggotaService.getAnggotaByIDKelompok(
-            kelompokTani.id
-          );
+          const listAnggotaKelompok: AnggotaKelompokModel[] =
+            await this.anggotaService.getAnggotaByIDKelompok(kelompokTani.id);
           // iterasi pada daftar anggota kelompok tani dan dapatkan data permohonannya
           await Promise.all(
             listAnggotaKelompok.map(async (anggota) => {
@@ -138,13 +141,15 @@ export class PermohonanService {
                 kelompokTani.id,
                 anggota
               );
+              model.anggota_id = anggota.id;
               model.anggota = anggota;
               // tambahkan data ke array
               listDataPermohonan.push(model);
             })
           );
           // tambahkan permohonan ke data
-          const modelPermohonan: PermohonanPupukModel = new PermohonanPupukModel();
+          const modelPermohonan: PermohonanPupukModel =
+            new PermohonanPupukModel();
           modelPermohonan.data = listDataPermohonan;
           modelPermohonan.kelompok_id = kelompokTani.id;
           modelPermohonan.kelompok_tani = kelompokTani;
@@ -153,13 +158,14 @@ export class PermohonanService {
         })
       );
     } catch (error) {
+      // jika terjadi error
       this.dialog.error(
         'Terjadi kesalahan saat pengambilan daftar data permohonan untuk dinas : ' +
           error
       );
       console.log(error);
     }
-
+    // kembalikan data memory
     return listData;
   }
 }

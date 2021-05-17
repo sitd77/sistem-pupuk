@@ -293,12 +293,14 @@
         <ng-container matColumnDef="organik_mt2">
           <th mat-header-cell *matHeaderCellDef>ORGANIK mt2</th>
           <td mat-cell *matCellDef="let item">
-            <input
-              type="text"
-              name="organik_mt2{{ item.anggota.id }}"
-              matInput
-              [(ngModel)]="item.organik_mt2.total"
-            />
+            <mat-form-field>
+              <input
+                type="text"
+                name="organik_mt2{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.organik_mt2.total"
+              />
+            </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
             {{ permohonan.organik_mt2 }}
@@ -309,12 +311,14 @@
         <ng-container matColumnDef="organik_mt3">
           <th mat-header-cell *matHeaderCellDef>ORGANIK mt3</th>
           <td mat-cell *matCellDef="let item">
-            <input
-              type="text"
-              name="organik_mt3{{ item.anggota.id }}"
-              matInput
-              [(ngModel)]="item.organik_mt3.total"
-            />
+            <mat-form-field>
+              <input
+                type="text"
+                name="organik_mt3{{ item.anggota.id }}"
+                matInput
+                [(ngModel)]="item.organik_mt3.total"
+              />
+            </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
             {{ permohonan.organik_mt3 }}

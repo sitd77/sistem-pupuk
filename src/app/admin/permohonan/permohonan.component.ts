@@ -1,13 +1,7 @@
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl,
-} from '@angular/forms';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { SwalService } from './../../../services/swal.service';
 import { MatPaginator } from '@angular/material/paginator';
 import {
-  PermohonanPupukModel,
   DistribusiPupukModel,
   IPermohonan,
 } from './../../../models/permohonan-model';
@@ -50,7 +44,6 @@ export class PermohonanComponent implements OnInit, OnDestroy {
   ];
 
   currentListData: IPermohonan[] = [];
-
   currentDataSources: MatTableDataSource<DistribusiPupukModel>[] = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

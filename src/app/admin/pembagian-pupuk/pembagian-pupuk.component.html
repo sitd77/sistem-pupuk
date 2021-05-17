@@ -1,1 +1,389 @@
-<p>pembagian-pupuk works!</p>
+<div
+  class="permohonan__container"
+  fxLayout="column"
+  *ngIf="currentListData.length; else nodata"
+>
+  <!-- item kelompok tani -->
+  <div
+    class="kelompok__tani__item"
+    fxLayout="column"
+    *ngFor="let per of currentListData"
+  >
+    <!-- title -->
+    <div class="row" fxLayout="row" fxLayoutAlign="space-between">
+      <p class="title">Kelompok Tani {{ per.kelompok.nama }}</p>
+    </div>
+    <!-- table untuk masing-masing kelompok -->
+    <form class="mat-elevation-z2 table-container" autocomplete="off">
+      <table mat-table [dataSource]="per.datasource">
+        <!-- header -->
+        <tr mat-header-row *matHeaderRowDef="dr1"></tr>
+        <tr mat-header-row *matHeaderRowDef="dr2"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="nomor">
+          <th mat-header-cell *matHeaderCellDef [style.display]="'none'"></th>
+          <td mat-cell *matCellDef="let item; let i = index">{{ i + 1 }}</td>
+          <th mat-footer-cell *matFooterCellDef>#</th>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="nik">
+          <th mat-header-cell *matHeaderCellDef [style.display]="'none'"></th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            {{ item.anggota.nik }}
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef [attr.colspan]="2">
+            Total
+          </th>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="nama">
+          <th mat-header-cell *matHeaderCellDef [style.display]="'none'"></th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            {{ item.anggota.nama }}
+          </td>
+          <th mat-footer-cell *matFooterCellDef [style.display]="'none'"></th>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="luas_lahan">
+          <th mat-header-cell *matHeaderCellDef [style.display]="'none'"></th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            {{ item.anggota.luas_lahan }} Ha
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.total_luas }} Ha
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="urea_mt1">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 1</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span
+              >{{ item.urea_mt1.diambil }} dari {{ item.urea_mt1.total }}</span
+            >
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.urea_mt1 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="urea_mt2">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 2</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span
+              >{{ item.urea_mt2.diambil }} dari {{ item.urea_mt2.total }}</span
+            >
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.urea_mt2 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="urea_mt3">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 3</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span
+              >{{ item.urea_mt3.diambil }} dari {{ item.urea_mt3.total }}</span
+            >
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.urea_mt3 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="sp36_mt1">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 1</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span
+              >{{ item.sp36_mt1.diambil }} dari {{ item.sp36_mt1.total }}</span
+            >
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.sp36_mt1 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="sp36_mt2">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 2</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span
+              >{{ item.sp36_mt2.diambil }} dari {{ item.sp36_mt2.total }}</span
+            >
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.sp36_mt2 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="sp36_mt3">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 3</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span
+              >{{ item.sp36_mt3.diambil }} dari {{ item.sp36_mt3.total }}</span
+            >
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.sp36_mt3 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="npk_mt1">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 1</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span
+              >{{ item.npk_mt1.diambil }} dari {{ item.npk_mt1.total }}</span
+            >
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.npk_mt1 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="npk_mt2">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 2</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span
+              >{{ item.npk_mt2.diambil }} dari {{ item.npk_mt2.total }}</span
+            >
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.npk_mt2 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="npk_mt3">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 3</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span
+              >{{ item.npk_mt3.diambil }} dari {{ item.npk_mt3.total }}</span
+            >
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.npk_mt3 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="za_mt1">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 1</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span>{{ item.za_mt1.diambil }} dari {{ item.za_mt1.total }}</span>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.za_mt1 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="za_mt2">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 2</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span>{{ item.za_mt2.diambil }} dari {{ item.za_mt2.total }}</span>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.za_mt2 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="za_mt3">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 3</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span>{{ item.za_mt3.diambil }} dari {{ item.za_mt3.total }}</span>
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.za_mt3 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="organik_mt1">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 1</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span
+              >{{ item.organik_mt1.diambil }} dari
+              {{ item.organik_mt1.total }}</span
+            >
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.organik_mt1 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="organik_mt2">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 2</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span
+              >{{ item.organik_mt1.diambil }} dari
+              {{ item.organik_mt2.total }}</span
+            >
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.organik_mt2 }}
+          </th>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="organik_mt3">
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 3</th>
+          <td
+            mat-cell
+            *matCellDef="let item"
+            (click)="openDetailPembagian(item, per)"
+          >
+            <span
+              >{{ item.organik_mt1.diambil }} dari
+              {{ item.organik_mt3.total }}</span
+            >
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef>
+            {{ per.organik_mt3 }}
+          </th>
+        </ng-container>
+
+        <!-- --------------------------------- header -------------------- -->
+        <ng-container matColumnDef="nomorx">
+          <th mat-header-cell *matHeaderCellDef rowspan="3">Nomor</th>
+        </ng-container>
+        <ng-container matColumnDef="nikx">
+          <th mat-header-cell *matHeaderCellDef rowspan="3">NIK Petani</th>
+        </ng-container>
+        <ng-container matColumnDef="namax">
+          <th mat-header-cell *matHeaderCellDef rowspan="3">Nama Petani</th>
+        </ng-container>
+        <ng-container matColumnDef="luasx">
+          <th mat-header-cell *matHeaderCellDef rowspan="3">
+            Rencana Tanam (Ha)
+          </th>
+        </ng-container>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef colspan="15">
+            Kebutuhan Pupuk Bersubsidi (Kg)
+          </th>
+        </ng-container>
+
+        <!-- --------------------------------- header 2 ------------------------ -->
+        <ng-container matColumnDef="u">
+          <th mat-header-cell *matHeaderCellDef colspan="3">UREA</th>
+        </ng-container>
+        <ng-container matColumnDef="s">
+          <th mat-header-cell *matHeaderCellDef colspan="3">SP-36</th>
+        </ng-container>
+        <ng-container matColumnDef="z">
+          <th mat-header-cell *matHeaderCellDef colspan="3">ZA</th>
+        </ng-container>
+        <ng-container matColumnDef="n">
+          <th mat-header-cell *matHeaderCellDef colspan="3">NPK</th>
+        </ng-container>
+        <ng-container matColumnDef="o">
+          <th mat-header-cell *matHeaderCellDef colspan="3">ORGANIK</th>
+        </ng-container>
+
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+      </table>
+
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+      ></mat-paginator>
+    </form>
+  </div>
+</div>
+
+<!-- nodata widget -->
+<ng-template #nodata>
+  <!-- no data -->
+  <app-nodata-widget></app-nodata-widget>
+</ng-template>
+
+<!-- form detail pembagian -->
+<app-detail-pembagian
+  [model]="model"
+  [permohonan]="permohonan"
+  (onUpdated)="onDetailUpdated($event)"
+  (onClosed)="onDetailClosed()"
+  [open]="isDetailPembagianOpen"
+></app-detail-pembagian>

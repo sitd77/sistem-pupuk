@@ -21,6 +21,11 @@ export class UsersService {
       .valueChanges({ idField: 'id' }) as Observable<UserModel[]>;
   }
 
+  /**
+   * dapatkan daftar data kelompok tani
+   * @async
+   * @returns UserModel[]
+   */
   async getListKelompokTani(): Promise<UserModel[]> {
     let listUser: UserModel[] = [];
 

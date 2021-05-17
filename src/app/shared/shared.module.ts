@@ -24,6 +24,8 @@ import { MatTableModule } from '@angular/material/table';
 import { FormAnggotaComponent } from './form-anggota/form-anggota.component';
 import { FormPermohonanComponent } from './form-permohonan/form-permohonan.component';
 import { NodataWidgetComponent } from './nodata-widget/nodata-widget.component';
+import { DetailPembagianComponent } from './detail-pembagian/detail-pembagian.component';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { NodataWidgetComponent } from './nodata-widget/nodata-widget.component';
     FormPermohonanComponent,
     NodataWidgetComponent,
     HargaPupukComponent,
+    DetailPembagianComponent,
   ],
   imports: [
     CommonModule,
@@ -59,6 +62,7 @@ import { NodataWidgetComponent } from './nodata-widget/nodata-widget.component';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    MatSliderModule,
   ],
   exports: [
     // export component's
@@ -89,10 +93,12 @@ import { NodataWidgetComponent } from './nodata-widget/nodata-widget.component';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    MatSliderModule,
     FormAnggotaComponent,
     FormPermohonanComponent,
     NodataWidgetComponent,
     HargaPupukComponent,
+    DetailPembagianComponent,
   ],
 })
 export class SharedModule {}

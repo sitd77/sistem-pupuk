@@ -39,7 +39,7 @@ const routes: Routes = [
   // redirect
   {
     path: '',
-    redirectTo: 'distribusi-pupuk',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
   {

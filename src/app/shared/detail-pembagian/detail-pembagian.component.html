@@ -1,0 +1,279 @@
+<!-- detail pembagian -->
+<form class="detail__container" [@openClose]="open ? true : false">
+  <!-- header -->
+  <mat-toolbar
+    color="primary"
+    fxLayout="row"
+    fxAlign="center space-between"
+    class="mat-elevation-z8"
+  >
+    <button mat-icon-button (click)="closeMe()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2 class="title">Detail Distribusi Pupuk</h2>
+    <button mat-icon-button (click)="submitForm()">
+      <mat-icon>save</mat-icon>
+    </button>
+  </mat-toolbar>
+  <!-- section for info user -->
+  <section id="info" *ngIf="model != null">
+    <!-- username -->
+    <div class="info__item">
+      <p class="info__item__title">Nama</p>
+      <p class="info__item__description">{{ model.anggota.nama }}</p>
+    </div>
+    <!-- nik -->
+    <div class="info__item">
+      <p class="info__item__title">NIK / No. KTP</p>
+      <p class="info__item__description">{{ model.anggota.nik }}</p>
+    </div>
+    <!-- rencana tanam -->
+    <div class="info__item">
+      <p class="info__item__title">Rencana Tanam</p>
+      <p class="info__item__description">{{ model.anggota.luas_lahan }} Ha</p>
+    </div>
+  </section>
+  <!-- section for data pupuk6y -->
+  <section id="data-form" *ngIf="open && newModel != null">
+    <!-- urea mt1 -->
+    <div class="data__item">
+      <p class="data__item__title">UREA :: MT 1</p>
+      <mat-slider
+        thumbLabel
+        [(ngModel)]="newModel.urea_mt1.diambil"
+        name="urea_mt1"
+        [disabled]="model.urea_mt1.diambil >= model.urea_mt1.total"
+        [min]="model.urea_mt1.diambil"
+        [max]="model.urea_mt1.total"
+        step="1"
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+      ></mat-slider>
+    </div>
+    <!-- urea mt2 -->
+    <div class="data__item">
+      <p class="data__item__title">UREA :: MT 2</p>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+        [(ngModel)]="newModel.urea_mt2.diambil"
+        name="urea_mt2"
+        [disabled]="model.urea_mt2.diambil >= model.urea_mt2.total"
+        [min]="model.urea_mt2.diambil"
+        [max]="model.urea_mt2.total"
+        step="1"
+      ></mat-slider>
+    </div>
+    <!-- urea mt3 -->
+    <div class="data__item">
+      <p class="data__item__title">UREA :: MT 3</p>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+        [(ngModel)]="newModel.urea_mt3.diambil"
+        name="urea_mt3"
+        [disabled]="model.urea_mt3.diambil >= model.urea_mt3.total"
+        [min]="model.urea_mt3.diambil"
+        [max]="model.urea_mt3.total"
+        step="1"
+      ></mat-slider>
+    </div>
+    <!-- sp-36 mt1 -->
+    <div class="data__item">
+      <p class="data__item__title">SP-36 :: MT 1</p>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+        [(ngModel)]="newModel.sp36_mt1.diambil"
+        name="sp36_mt1"
+        [disabled]="model.sp36_mt1.diambil >= model.sp36_mt1.total"
+        [min]="model.sp36_mt1.diambil"
+        [max]="model.sp36_mt1.total"
+        step="1"
+      ></mat-slider>
+    </div>
+    <!-- sp-36 mt2 -->
+    <div class="data__item">
+      <p class="data__item__title">SP-36 :: MT 2</p>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+        [(ngModel)]="newModel.sp36_mt2.diambil"
+        name="sp36_mt2"
+        [disabled]="model.sp36_mt2.diambil >= model.sp36_mt2.total"
+        [min]="model.sp36_mt2.diambil"
+        [max]="model.sp36_mt2.total"
+        step="1"
+      ></mat-slider>
+    </div>
+    <!-- sp-36 mt3 -->
+    <div class="data__item">
+      <p class="data__item__title">SP-36 :: MT 3</p>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+        [(ngModel)]="newModel.sp36_mt3.diambil"
+        name="sp36_mt3"
+        [disabled]="model.sp36_mt3.diambil >= model.sp36_mt3.total"
+        [min]="model.sp36_mt3.diambil"
+        [max]="model.sp36_mt3.total"
+        step="1"
+      ></mat-slider>
+    </div>
+    <!-- za mt1 -->
+    <div class="data__item">
+      <p class="data__item__title">ZA :: MT 1</p>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+        [(ngModel)]="newModel.za_mt1.diambil"
+        name="za_mt1"
+        [disabled]="model.za_mt1.diambil >= model.za_mt1.total"
+        [min]="model.za_mt1.diambil"
+        [max]="model.za_mt1.total"
+        step="1"
+      ></mat-slider>
+    </div>
+    <!-- za mt2 -->
+    <div class="data__item">
+      <p class="data__item__title">ZA :: MT 2</p>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+        [(ngModel)]="newModel.za_mt2.diambil"
+        name="za_mt2"
+        [disabled]="model.za_mt2.diambil >= model.za_mt2.total"
+        [min]="model.za_mt2.diambil"
+        [max]="model.za_mt2.total"
+        step="1"
+      ></mat-slider>
+    </div>
+    <!-- za mt3 -->
+    <div class="data__item">
+      <p class="data__item__title">ZA :: MT 3</p>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+        [(ngModel)]="newModel.za_mt3.diambil"
+        name="za_mt3"
+        [disabled]="model.za_mt3.diambil >= model.za_mt3.total"
+        [min]="model.za_mt3.diambil"
+        [max]="model.za_mt3.total"
+        step="1"
+      ></mat-slider>
+    </div>
+    <!-- npk mt1 -->
+    <div class="data__item">
+      <p class="data__item__title">NPK :: MT 1</p>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+        [(ngModel)]="newModel.npk_mt1.diambil"
+        name="npk_mt1"
+        [disabled]="model.npk_mt1.diambil >= model.npk_mt1.total"
+        [min]="model.npk_mt1.diambil"
+        [max]="model.npk_mt1.total"
+        step="1"
+      ></mat-slider>
+    </div>
+    <!-- npk mt2 -->
+    <div class="data__item">
+      <p class="data__item__title">NPK :: MT 2</p>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+        [(ngModel)]="newModel.npk_mt2.diambil"
+        name="npk_mt2"
+        [disabled]="model.npk_mt2.diambil >= model.npk_mt2.total"
+        [min]="model.npk_mt2.diambil"
+        [max]="model.npk_mt2.total"
+        step="1"
+      ></mat-slider>
+    </div>
+    <!-- npk mt3 -->
+    <div class="data__item">
+      <p class="data__item__title">NPK :: MT 3</p>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+        [(ngModel)]="newModel.npk_mt3.diambil"
+        name="npk_mt3"
+        [disabled]="model.npk_mt3.diambil >= model.npk_mt3.total"
+        [min]="model.npk_mt3.diambil"
+        [max]="model.npk_mt3.total"
+        step="1"
+      ></mat-slider>
+    </div>
+    <!-- organik mt1 -->
+    <div class="data__item">
+      <p class="data__item__title">ORGANIK :: MT 1</p>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+        [(ngModel)]="newModel.organik_mt1.diambil"
+        name="organik_mt1"
+        [disabled]="model.organik_mt1.diambil >= model.organik_mt1.total"
+        [min]="model.organik_mt1.diambil"
+        [max]="model.organik_mt1.total"
+        step="1"
+      ></mat-slider>
+    </div>
+    <!-- organik mt2 -->
+    <div class="data__item">
+      <p class="data__item__title">ORGANIK :: MT 2</p>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+        [(ngModel)]="newModel.organik_mt2.diambil"
+        name="organik_mt2"
+        [disabled]="model.organik_mt2.diambil >= model.organik_mt2.total"
+        [min]="model.organik_mt2.diambil"
+        [max]="model.organik_mt2.total"
+        step="1"
+      ></mat-slider>
+    </div>
+    <!-- organik mt3 -->
+    <div class="data__item">
+      <p class="data__item__title">ORGANIK :: MT 3</p>
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        class="data__item__description"
+        color="primary"
+        [(ngModel)]="newModel.organik_mt3.diambil"
+        name="organik_mt3"
+        [disabled]="model.organik_mt3.diambil >= model.organik_mt3.total"
+        [min]="model.organik_mt3.diambil"
+        [max]="model.organik_mt3.total"
+        step="1"
+      ></mat-slider>
+    </div>
+  </section>
+</form>

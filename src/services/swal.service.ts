@@ -171,7 +171,7 @@ export class SwalService {
       showCancelButton: true,
       cancelButtonText: 'Tidak',
       cancelButtonColor: '$blue',
-      confirmButtonText: 'Ya. Hapus !',
+      confirmButtonText: 'Ya!',
       confirmButtonColor: '$yellow',
     });
   }
