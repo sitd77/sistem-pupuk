@@ -7,57 +7,64 @@
   <div
     class="kelompok__tani__item"
     fxLayout="column"
-    *ngFor="let permohonan of currentListData"
+    *ngFor="let per of currentListData"
   >
     <!-- title -->
     <div class="row" fxLayout="row" fxLayoutAlign="space-between">
-      <p class="title">Kelompok Tani {{ permohonan.kelompok.nama }}</p>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="submitForm(permohonan)"
-      >
+      <p class="title">Kelompok Tani {{ per.kelompok.nama }}</p>
+      <button mat-raised-button color="primary" (click)="submitForm(per)">
         <mat-icon>save</mat-icon> Simpan Data
       </button>
     </div>
     <!-- table untuk masing-masing kelompok -->
     <form class="mat-elevation-z2 table-container" autocomplete="off">
-      <table mat-table [dataSource]="permohonan.datasource">
+      <table mat-table [dataSource]="per.datasource">
+        <!-- header -->
+        <tr mat-header-row *matHeaderRowDef="dr1"></tr>
+        <tr mat-header-row *matHeaderRowDef="dr2"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
         <!-- Position Column -->
         <ng-container matColumnDef="nomor">
-          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <th mat-header-cell *matHeaderCellDef [style.display]="'none'"></th>
           <td mat-cell *matCellDef="let item; let i = index">{{ i + 1 }}</td>
           <th mat-footer-cell *matFooterCellDef>#</th>
         </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="nama">
-          <th mat-header-cell *matHeaderCellDef>Nama Anggota</th>
-          <td mat-cell *matCellDef="let item">{{ item.anggota.nama }}</td>
-          <th align="left" mat-footer-cell *matFooterCellDef>Total</th>
-        </ng-container>
-
         <!-- Weight Column -->
         <ng-container matColumnDef="nik">
-          <th mat-header-cell *matHeaderCellDef>NIK / No. KTP</th>
-          <td mat-cell *matCellDef="let item">{{ item.anggota.nik }}</td>
-          <th align="left" mat-footer-cell *matFooterCellDef></th>
+          <th mat-header-cell *matHeaderCellDef [style.display]="'none'"></th>
+          <td mat-cell *matCellDef="let item">
+            {{ item.anggota.nik }}
+          </td>
+          <th align="left" mat-footer-cell *matFooterCellDef [attr.colspan]="2">
+            Total
+          </th>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="nama">
+          <th mat-header-cell *matHeaderCellDef [style.display]="'none'"></th>
+          <td mat-cell *matCellDef="let item">
+            {{ item.anggota.nama }}
+          </td>
+          <th mat-footer-cell *matFooterCellDef [style.display]="'none'"></th>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="luas_lahan">
-          <th mat-header-cell *matHeaderCellDef>Rencana Tanam (Ha)</th>
+          <th mat-header-cell *matHeaderCellDef [style.display]="'none'"></th>
           <td mat-cell *matCellDef="let item">
             {{ item.anggota.luas_lahan }} Ha
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.total_luas }} Ha
+            {{ per.total_luas }} Ha
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="urea_mt1">
-          <th mat-header-cell *matHeaderCellDef>UREA mt1</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 1</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -69,13 +76,13 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.urea_mt1 }}
+            {{ per.urea_mt1 }}
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="urea_mt2">
-          <th mat-header-cell *matHeaderCellDef>UREA mt2</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 2</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -87,13 +94,13 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.urea_mt2 }}
+            {{ per.urea_mt2 }}
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="urea_mt3">
-          <th mat-header-cell *matHeaderCellDef>UREA mt3</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 3</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -105,13 +112,13 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.urea_mt3 }}
+            {{ per.urea_mt3 }}
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="sp36_mt1">
-          <th mat-header-cell *matHeaderCellDef>SP36 mt1</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 1</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -123,13 +130,13 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.sp36_mt1 }}
+            {{ per.sp36_mt1 }}
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="sp36_mt2">
-          <th mat-header-cell *matHeaderCellDef>SP36 mt2</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 2</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -141,13 +148,13 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.sp36_mt2 }}
+            {{ per.sp36_mt2 }}
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="sp36_mt3">
-          <th mat-header-cell *matHeaderCellDef>SP36 mt3</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 3</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -159,13 +166,13 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.sp36_mt3 }}
+            {{ per.sp36_mt3 }}
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="npk_mt1">
-          <th mat-header-cell *matHeaderCellDef>NPK mt1</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 1</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -177,13 +184,13 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.npk_mt1 }}
+            {{ per.npk_mt1 }}
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="npk_mt2">
-          <th mat-header-cell *matHeaderCellDef>NPK mt2</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 2</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -195,13 +202,13 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.npk_mt2 }}
+            {{ per.npk_mt2 }}
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="npk_mt3">
-          <th mat-header-cell *matHeaderCellDef>NPK mt3</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 3</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -213,13 +220,13 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.npk_mt3 }}
+            {{ per.npk_mt3 }}
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="za_mt1">
-          <th mat-header-cell *matHeaderCellDef>ZA mt1</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 1</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -231,13 +238,13 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.za_mt1 }}
+            {{ per.za_mt1 }}
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="za_mt2">
-          <th mat-header-cell *matHeaderCellDef>ZA mt2</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 2</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -249,13 +256,13 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.za_mt2 }}
+            {{ per.za_mt2 }}
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="za_mt3">
-          <th mat-header-cell *matHeaderCellDef>ZA mt3</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 3</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -267,13 +274,13 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.za_mt3 }}
+            {{ per.za_mt3 }}
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="organik_mt1">
-          <th mat-header-cell *matHeaderCellDef>ORGANIK mt1</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 1</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -285,13 +292,13 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.organik_mt1 }}
+            {{ per.organik_mt1 }}
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="organik_mt2">
-          <th mat-header-cell *matHeaderCellDef>ORGANIK mt2</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 2</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -303,13 +310,13 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.organik_mt2 }}
+            {{ per.organik_mt2 }}
           </th>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="organik_mt3">
-          <th mat-header-cell *matHeaderCellDef>ORGANIK mt3</th>
+          <th align="center" mat-header-cell *matHeaderCellDef>MT 3</th>
           <td mat-cell *matCellDef="let item">
             <mat-form-field>
               <input
@@ -321,11 +328,48 @@
             </mat-form-field>
           </td>
           <th align="left" mat-footer-cell *matFooterCellDef>
-            {{ permohonan.organik_mt3 }}
+            {{ per.organik_mt3 }}
           </th>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <!-- --------------------------------- header -------------------- -->
+        <ng-container matColumnDef="nomorx">
+          <th mat-header-cell *matHeaderCellDef rowspan="3">Nomor</th>
+        </ng-container>
+        <ng-container matColumnDef="nikx">
+          <th mat-header-cell *matHeaderCellDef rowspan="3">NIK Petani</th>
+        </ng-container>
+        <ng-container matColumnDef="namax">
+          <th mat-header-cell *matHeaderCellDef rowspan="3">Nama Petani</th>
+        </ng-container>
+        <ng-container matColumnDef="luasx">
+          <th mat-header-cell *matHeaderCellDef rowspan="3">
+            Rencana Tanam (Ha)
+          </th>
+        </ng-container>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef colspan="15">
+            Kebutuhan Pupuk Bersubsidi (Kg)
+          </th>
+        </ng-container>
+
+        <!-- --------------------------------- header 2 ------------------------ -->
+        <ng-container matColumnDef="u">
+          <th mat-header-cell *matHeaderCellDef colspan="3">UREA</th>
+        </ng-container>
+        <ng-container matColumnDef="s">
+          <th mat-header-cell *matHeaderCellDef colspan="3">SP-36</th>
+        </ng-container>
+        <ng-container matColumnDef="z">
+          <th mat-header-cell *matHeaderCellDef colspan="3">ZA</th>
+        </ng-container>
+        <ng-container matColumnDef="n">
+          <th mat-header-cell *matHeaderCellDef colspan="3">NPK</th>
+        </ng-container>
+        <ng-container matColumnDef="o">
+          <th mat-header-cell *matHeaderCellDef colspan="3">ORGANIK</th>
+        </ng-container>
+
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
       </table>

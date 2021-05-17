@@ -55,3 +55,10 @@ th {
 td {
   padding: 0.5rem;
 }
+
+th.mat-header-cell:last-of-type,
+th.mat-header-cell:first-of-type,
+td.mat-cell:last-of-type,
+td.mat-cell:first-of-type {
+  padding: 0 !important;
+}

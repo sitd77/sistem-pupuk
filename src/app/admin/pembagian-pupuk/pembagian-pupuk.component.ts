@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/auth.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -55,6 +56,10 @@ export class PembagianPupukComponent implements OnInit, OnDestroy {
   model: DistribusiPupukModel;
   permohonan: IPermohonan;
 
+  // user subscription
+  subUser: Subscription;
+  currentLevel: number = 0;
+
   /**
    * subscription
    * @param usersService
@@ -63,9 +68,16 @@ export class PembagianPupukComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private dialog: SwalService,
+    private authService: AuthService, // current user service
     public usersService: UsersService, // service untuk mendapatkan data users
     public service: PermohonanService // service untuk data permohonan pupuk
-  ) {}
+  ) {
+    this.subUser = this.authService.currentUser.subscribe((user) => {
+      if (user) {
+        this.currentLevel = user.role;
+      }
+    });
+  }
 
   /**
    * inisialisasi data distribusi pupuk
@@ -264,6 +276,10 @@ export class PembagianPupukComponent implements OnInit, OnDestroy {
     model: DistribusiPupukModel,
     permohonan: IPermohonan
   ): void {
+    if (this.currentLevel != 2) {
+      return;
+    }
+
     this.model = model;
     this.permohonan = permohonan;
     this.isDetailPembagianOpen = true;

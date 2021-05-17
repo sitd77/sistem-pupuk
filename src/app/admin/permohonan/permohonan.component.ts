@@ -42,6 +42,8 @@ export class PermohonanComponent implements OnInit, OnDestroy {
     'organik_mt2',
     'organik_mt3',
   ];
+  dr1: string[] = ['nomorx', 'nikx', 'namax', 'luasx', 'title'];
+  dr2: string[] = ['u', 's', 'z', 'n', 'o'];
 
   currentListData: IPermohonan[] = [];
   currentDataSources: MatTableDataSource<DistribusiPupukModel>[] = [];

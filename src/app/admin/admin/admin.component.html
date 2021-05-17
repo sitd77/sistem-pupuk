@@ -46,7 +46,7 @@
         class="link"
         [routerLink]="['distribusi-pupuk']"
         [routerLinkActive]="'active'"
-        *ngIf="currentUser.role == 2"
+        *ngIf="currentUser.role != 3"
       >
         <mat-icon matListIcon>note_add</mat-icon>
         <span matLine>Distribusi Pupuk</span>

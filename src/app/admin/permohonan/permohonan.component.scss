@@ -20,3 +20,30 @@ p.title {
 .mat-paginator-outer-container {
   width: 100% !important;
 }
+
+mat-form-field {
+  width: 30px;
+}
+
+th,
+td {
+  text-align: center !important;
+}
+
+th {
+  font-weight: 700;
+}
+
+table,
+tr,
+td,
+th {
+  border: 1px solid rgba(teal, 0.1);
+}
+
+th.mat-header-cell:last-of-type,
+th.mat-header-cell:first-of-type,
+td.mat-cell:last-of-type,
+td.mat-cell:first-of-type {
+  padding: 0 !important;
+}
