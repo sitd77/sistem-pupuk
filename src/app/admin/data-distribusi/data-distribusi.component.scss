@@ -1,0 +1,80 @@
+header {
+  display: flex;
+  align-tracks: center;
+  justify-content: space-between;
+}
+
+mat-dialog-content {
+  height: 100%;
+  form {
+    height: 100%;
+    table {
+      height: 100%;
+    }
+  }
+}
+
+table {
+  width: 100% !important;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 2rem;
+}
+
+.row {
+  margin-top: 3.5rem;
+}
+
+p.title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: rgb(92, 92, 92);
+}
+
+.mat-paginator-outer-container {
+  width: 100% !important;
+}
+
+tr {
+  transition: 0.4s ease;
+
+  td {
+    transition: 0.4s ease;
+  }
+
+  &:hover {
+    td {
+      cursor: pointer;
+      background: rgba(teal, 0.1);
+    }
+  }
+}
+
+th {
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+th,
+td {
+  text-align: center !important;
+}
+
+table,
+tr,
+td,
+th {
+  border: 1px solid rgba(teal, 0.1);
+}
+
+td {
+  padding: 0.5rem;
+}
+
+th.mat-header-cell:last-of-type,
+th.mat-header-cell:first-of-type,
+td.mat-cell:last-of-type,
+td.mat-cell:first-of-type {
+  padding: 0 !important;
+}

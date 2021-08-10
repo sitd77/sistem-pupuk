@@ -9,3 +9,10 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+.fullscreen {
+  .mat-dialog-container {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+  }
+}

@@ -1,3 +1,4 @@
+import { UserModel } from './../models/user-model';
 import { AnggotaKelompokModel } from 'src/models/kelompok-tani';
 import {
   DistribusiPupukModel,
@@ -167,5 +168,47 @@ export class PermohonanService {
     }
     // kembalikan data memory
     return listData;
+  }
+
+  /**
+   * dapatkan data permohonan untuk spesifik kelompok
+   */
+  async getPermohonanByKelompok(
+    kelompokTani: UserModel
+  ): Promise<PermohonanPupukModel> {
+    // tambahkan permohonan ke data
+    const modelPermohonan: PermohonanPupukModel = new PermohonanPupukModel();
+    try {
+      // buat template variabel untuk menampung data permohonan dari kelompok tani
+      let listDataPermohonan: DistribusiPupukModel[] = [];
+      // ambil daftar anggota dari kelompok tani
+      const listAnggotaKelompok: AnggotaKelompokModel[] =
+        await this.anggotaService.getAnggotaByIDKelompok(kelompokTani.id);
+      // iterasi pada daftar anggota kelompok tani dan dapatkan data permohonannya
+      await Promise.all(
+        listAnggotaKelompok.map(async (anggota) => {
+          // ambil data distribusi pupuk
+          const model = await this.getPermohonanByAnggotaID(
+            kelompokTani.id,
+            anggota
+          );
+          model.anggota_id = anggota.id;
+          model.anggota = anggota;
+          // tambahkan data ke array
+          listDataPermohonan.push(model);
+        })
+      );
+      modelPermohonan.data = listDataPermohonan;
+      modelPermohonan.kelompok_id = kelompokTani.id;
+      modelPermohonan.kelompok_tani = kelompokTani;
+    } catch (error) {
+      // jika terjadi error
+      this.dialog.error(
+        'Terjadi kesalahan saat pengambilan daftar data permohonan untuk dinas : ' +
+          error
+      );
+      console.log(error);
+    }
+    return modelPermohonan;
   }
 }

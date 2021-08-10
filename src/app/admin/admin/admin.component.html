@@ -34,13 +34,25 @@
       <a
         mat-list-item
         class="link"
+        [routerLink]="['kelompok-tani']"
+        [routerLinkActive]="'active'"
+        *ngIf="currentUser.role != 3"
+      >
+        <mat-icon matListIcon>groups</mat-icon>
+        <span matLine>Kelompok Tani</span>
+      </a>
+
+      <!-- <a
+        mat-list-item
+        class="link"
         [routerLink]="['pengajuan']"
         [routerLinkActive]="'active'"
         *ngIf="currentUser.role == 1"
       >
-        <mat-icon matListIcon>assessment</mat-icon>
-        <span matLine>Pengajuan</span>
+        <mat-icon matListIcon>groups</mat-icon>
+        <span matLine>Permohonan</span>
       </a>
+
       <a
         mat-list-item
         class="link"
@@ -50,7 +62,7 @@
       >
         <mat-icon matListIcon>note_add</mat-icon>
         <span matLine>Distribusi Pupuk</span>
-      </a>
+      </a> -->
       <h3 matSubheader>Lainnya</h3>
       <a
         mat-list-item

@@ -1,0 +1,15 @@
+header {
+  display: flex;
+  align-tracks: center;
+  justify-content: space-between;
+}
+
+mat-dialog-content {
+  height: 100%;
+  form {
+    height: 100%;
+    table {
+      height: 100%;
+    }
+  }
+}

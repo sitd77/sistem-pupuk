@@ -1,3 +1,4 @@
+import { KelompokViewComponent } from './kelompok-view/kelompok-view.component';
 import { ProfilComponent } from './profil/profil.component';
 import { PermohonanComponent } from './permohonan/permohonan.component';
 import { PembagianPupukComponent } from './pembagian-pupuk/pembagian-pupuk.component';
@@ -30,6 +31,11 @@ const routes: Routes = [
     component: PermohonanComponent,
   },
 
+  {
+    path: 'kelompok-tani',
+    component: KelompokViewComponent,
+  },
+
   // untuk semua
   {
     path: 'profil',
@@ -39,7 +45,7 @@ const routes: Routes = [
   // redirect
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'kelompok-tani',
     pathMatch: 'full',
   },
   {

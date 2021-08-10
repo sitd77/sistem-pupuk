@@ -1,3 +1,6 @@
+import { DataDistribusiComponent } from './data-distribusi/data-distribusi.component';
+import { DetailPengajuanComponent } from './detail-pengajuan/detail-pengajuan.component';
+import { KelompokViewComponent } from './kelompok-view/kelompok-view.component';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,6 +21,9 @@ import { ProfilComponent } from './profil/profil.component';
     PermohonanComponent,
     PembagianPupukComponent,
     ProfilComponent,
+    KelompokViewComponent,
+    DetailPengajuanComponent,
+    DataDistribusiComponent,
   ],
   imports: [CommonModule, AdminRoutingModule, SharedModule],
 })

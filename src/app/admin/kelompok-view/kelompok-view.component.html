@@ -1,0 +1,27 @@
+<div class="container">
+  <mat-card class="example-card" *ngFor="let k of listData; let i = index">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon>cabin</mat-icon>
+      </div>
+      <mat-card-title color="primary">{{ k.nama }}</mat-card-title>
+      <mat-card-subtitle>{{ k.email }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Alamat {{ k.alamat }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="openDistribusiForm(k)">
+        <mat-icon>reduce_capacity</mat-icon><span>Distribusi Pupuk</span>
+      </button>
+      <button
+        mat-button
+        color="primary"
+        *ngIf="currentUser.role == 1"
+        (click)="openPengajuanForm(k)"
+      >
+        <mat-icon>hail</mat-icon> <span>Pengajuan</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
