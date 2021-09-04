@@ -1,0 +1,51 @@
+<div
+  style="
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    background-color: white;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 2rem;
+  "
+>
+  <!-- top -->
+  <div
+    style="
+      width: calc(100vw - 4rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    "
+  >
+    <button mat-icon-button (click)="closeMe()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>Laporan Data Kelompok Tani {{ data["nama"] }}</h1>
+  </div>
+
+  <!-- table report -->
+  <div
+    style="margin-top: 5rem; width: calc(100vw - 4rem); overflow: hidden auto"
+  >
+    <table style="width: 100%; overflow: auto" id="datareport">
+      <thead>
+        <tr style="text-align: left">
+          <th>Tanggal</th>
+          <th>Nama Anggota</th>
+          <th>Pengambilan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of listData">
+          <td>{{ dateService.getDateFromTimestamp(d.tanggal) }}</td>
+          <td>{{ d.anggota }}</td>
+          <td>{{ parseReport(d.pengambilan) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

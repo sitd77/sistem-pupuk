@@ -45,7 +45,7 @@ const routes: Routes = [
   // redirect
   {
     path: '',
-    redirectTo: 'kelompok-tani',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
   {

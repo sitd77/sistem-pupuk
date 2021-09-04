@@ -25,12 +25,18 @@ const routes: Routes = [
       import('./admin/admin.module').then((m) => m.AdminModule),
   },
   {
-    path: '',
+    path: 'landing',
     component: LandingComponent,
     canActivate: [AngularFireAuthGuard],
     data: {
       authGuardPipe: redirectLoggedInToDashboard,
     },
+  },
+
+  {
+    path: '',
+    redirectTo: 'landing',
+    pathMatch: 'full',
   },
 
   {

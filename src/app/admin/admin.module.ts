@@ -1,3 +1,4 @@
+import { ReportViewComponent } from './report-view/report-view.component';
 import { DataDistribusiComponent } from './data-distribusi/data-distribusi.component';
 import { DetailPengajuanComponent } from './detail-pengajuan/detail-pengajuan.component';
 import { KelompokViewComponent } from './kelompok-view/kelompok-view.component';
@@ -24,6 +25,7 @@ import { ProfilComponent } from './profil/profil.component';
     KelompokViewComponent,
     DetailPengajuanComponent,
     DataDistribusiComponent,
+    ReportViewComponent,
   ],
   imports: [CommonModule, AdminRoutingModule, SharedModule],
 })

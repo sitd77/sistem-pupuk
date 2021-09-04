@@ -296,6 +296,7 @@ export class DataDistribusiComponent implements OnInit {
 
     const newData = currentData.map((d) => {
       if (d.anggota.id == result.distribusi.anggota.id) {
+        //TODO: Tambahkan rekam perubahan data
         return result.distribusi;
       } else {
         return d;

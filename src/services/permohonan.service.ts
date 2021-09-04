@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import { UserModel } from './../models/user-model';
 import { AnggotaKelompokModel } from 'src/models/kelompok-tani';
 import {
@@ -18,7 +19,9 @@ import { PermohonanPupukModel } from 'src/models/permohonan-model';
 export class PermohonanService {
   /// var's
   public $listPermohonan: Observable<any>;
+  public $listReport: Observable<any>;
   private _collection: string = 'permohonan';
+  private _reportCollection: string = 'report';
 
   /**
    * konstructor
@@ -33,6 +36,9 @@ export class PermohonanService {
   ) {
     // subscribe data changes
     this.firestore.collection(this._collection).valueChanges;
+    this.firestore.collection(this._reportCollection, (ref) =>
+      ref.orderBy('kelompok_id', 'desc')
+    ).valueChanges;
   }
 
   /**
@@ -51,6 +57,7 @@ export class PermohonanService {
       const dataAsJSObject = data.map((obj) => {
         return Object.assign({}, obj);
       });
+      console.log('savePermohonan', dataAsJSObject);
       // asynchronous firestore
       await this.firestore
         .collection(this._collection)
@@ -210,5 +217,75 @@ export class PermohonanService {
       console.log(error);
     }
     return modelPermohonan;
+  }
+
+  /**
+   * penambahan report baru
+   */
+  async submitNewReport(
+    anggota: AnggotaKelompokModel,
+    kelompokId: string,
+    report: string
+  ): Promise<void> {
+    this.dialog.loading('Memperbarui laporan ...');
+    // error handler
+    try {
+      // cari data anggota
+      const r = await this.firestore
+        .collection('users')
+        .doc(kelompokId)
+        .get()
+        .toPromise();
+      let kelompok_nama = '';
+      if (r.exists) {
+        const dataKelompok = r.data();
+        kelompok_nama = dataKelompok['nama'];
+      }
+
+      // asynchronous firestore
+      await this.firestore.collection(this._reportCollection).add({
+        anggota_id: anggota.id,
+        kelompok_id: kelompokId,
+        anggota: anggota.nama,
+        kelompok: kelompok_nama,
+        pengambilan: report,
+        tanggal: firebase.firestore.Timestamp.now(),
+      });
+
+      // log ketika sukses
+      this.dialog.toastsuccess('Entri report berhasil.');
+
+      // catch error jika ada
+    } catch (error) {
+      // log error
+      console.log(error);
+      this.dialog.error('Terjadi kesalahan saat entri data report : ' + error);
+    }
+  }
+
+  /**
+   * dapatkan daftar report
+   */
+  async getListReport(kelompokId: string): Promise<any> {
+    let data = [];
+    const r = await this.firestore
+      .collection(this._reportCollection, (ref) =>
+        ref.orderBy('tanggal', 'desc')
+      )
+      .get()
+      .toPromise();
+    if (r.size > 0) {
+      r.docs.forEach((doc) => {
+        const d = doc.data();
+        if (d['kelompok_id'] == kelompokId) {
+          data.push({
+            id: doc.id,
+            ...(d as Object),
+          });
+        }
+      });
+    }
+
+    return data;
   }
 }

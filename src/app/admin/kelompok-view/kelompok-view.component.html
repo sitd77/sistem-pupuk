@@ -1,5 +1,11 @@
 <div class="container">
-  <mat-card class="example-card" *ngFor="let k of listData; let i = index">
+  <mat-card
+    class="example-card"
+    *ngFor="let k of listData; let i = index"
+    [style.display]="
+      currentUser.role == 3 && currentUser.id != k.id ? 'none' : 'initial'
+    "
+  >
     <mat-card-header>
       <div mat-card-avatar>
         <mat-icon>cabin</mat-icon>
@@ -21,6 +27,15 @@
         (click)="openPengajuanForm(k)"
       >
         <mat-icon>hail</mat-icon> <span>Pengajuan</span>
+      </button>
+
+      <button
+        mat-button
+        color="primary"
+        *ngIf="currentUser.role == 2"
+        (click)="openReportForm(k)"
+      >
+        <mat-icon>print</mat-icon> <span>Report</span>
       </button>
     </mat-card-actions>
   </mat-card>

@@ -1,3 +1,4 @@
+import { ReportViewComponent } from './../report-view/report-view.component';
 import { DataDistribusiComponent } from './../data-distribusi/data-distribusi.component';
 import { DetailPengajuanComponent } from './../detail-pengajuan/detail-pengajuan.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -27,6 +28,7 @@ export class KelompokViewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub = this.authService.currentUser.subscribe((user) => {
       this.currentUser = user;
+
     });
 
     this.subs = this.usersService.$listKelompokTani.subscribe((list) => {
@@ -40,6 +42,24 @@ export class KelompokViewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub?.unsubscribe();
     this.subs?.unsubscribe();
+  }
+
+  openReportForm(k: UserModel) {
+    this.dialog.open(ReportViewComponent, {
+      data: {
+        kelompok_id: k.id,
+        ...k,
+      },
+      // panelClass: 'fullscreen',
+      // position: {
+      //   top: '0px',
+      //   left: '0px',
+      // },
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+    });
   }
 
   openDistribusiForm(k: UserModel) {
