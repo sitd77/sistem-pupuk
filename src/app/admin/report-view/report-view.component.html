@@ -24,26 +24,51 @@
     <button mat-icon-button (click)="closeMe()">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <h1>Laporan Data Kelompok Tani {{ data["nama"] }}</h1>
+    
+    <!-- <div style="display: flex; align-items: center; flex-direction: column;">
+      <h1>Toko Firda Tani</h1>
+      <h1>Laporan Penyaluran Distribusi Pupuk pada {{ data["nama"] }}</h1>
+
+    </div> -->
   </div>
 
   <!-- table report -->
   <div
     style="margin-top: 5rem; width: calc(100vw - 4rem); overflow: hidden auto"
   >
-    <table style="width: 100%; overflow: auto" id="datareport">
+    <table style="width: 100%; overflow: auto" id="datareport" border="1">
       <thead>
-        <tr style="text-align: left">
-          <th>Tanggal</th>
-          <th>Nama Anggota</th>
-          <th>Pengambilan</th>
+        <tr style="text-align: center;">
+          <th colspan="8">Toko Firda Tani</th>
+        </tr>
+        <tr style="text-align: center;">
+          <th colspan="8">Laporan Distribusi Pupuk Kelompok Tani {{data['nama']}}</th>
+        </tr>
+        <tr style="text-align: center">
+          <th rowspan="2">Tanggal</th>
+          <th rowspan="2">Nama Anggota</th>
+          <th rowspan="2">NIK</th>
+          <th colspan="5">Jenis Pupuk</th>
+        </tr>
+        <tr>
+          <th>Urea</th>
+          <th>ZA</th>
+          <th>SP36</th>
+          <th>NPK</th>
+          <th>Organik</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let d of listData">
-          <td>{{ dateService.getDateFromTimestamp(d.tanggal) }}</td>
-          <td>{{ d.anggota }}</td>
-          <td>{{ parseReport(d.pengambilan) }}</td>
+          <td>{{ d.tanggal }}</td>
+          <td>{{ d.nama }}</td>
+          <td>'{{ d.nik }}</td>
+          <td>{{d.urea}} Kg</td>
+          <td>{{d.za}} Kg</td>
+          <td>{{d.sp36}} Kg</td>
+          <td>{{d.npk}} Kg</td>
+          <td>{{d.organik}} Kg</td>
+          
         </tr>
       </tbody>
     </table>

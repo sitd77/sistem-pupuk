@@ -247,6 +247,7 @@ export class PermohonanService {
         anggota_id: anggota.id,
         kelompok_id: kelompokId,
         anggota: anggota.nama,
+        nik: anggota.nik,
         kelompok: kelompok_nama,
         pengambilan: report,
         tanggal: firebase.firestore.Timestamp.now(),
@@ -285,7 +286,7 @@ export class PermohonanService {
         }
       });
     }
-
+    //console.log(data)
     return data;
   }
 }

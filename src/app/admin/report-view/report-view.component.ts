@@ -25,7 +25,8 @@ export class ReportViewComponent implements OnInit {
   ngOnInit() {
     const kelompokId = this.data['kelompok_id'];
     this.service.getListReport(kelompokId).then((l) => {
-      this.listData = l;
+      this.listData = this.parseListForData(l)
+      
       setTimeout(() => {
         this.printReport();
         this.printReport();
@@ -33,12 +34,100 @@ export class ReportViewComponent implements OnInit {
     });
   }
 
+  parseListForData(list: any) : any{
+    let newlist: any = []
+
+    // step 1 : ambil id anggota dan tanggal
+    let listanggota: any = []
+    list.forEach((d:any)=> {
+      const id = d.anggota_id
+      const tanggal = this.dateService.getDateFromTimestamp( d.tanggal)
+      let found = false
+      listanggota.forEach((a:any) => {
+        if(a.id == id && a.tanggal == tanggal) {
+          found= true
+        }
+      })
+
+      if(!found) {
+        listanggota.push({
+          nama:d.anggota,
+          nik:d.nik,
+          id: id,
+          tanggal:tanggal,
+        })
+      }
+    })
+
+    // step 2 : ambil data pupuk
+    listanggota.forEach((a: any) => {
+      let za = 0
+      let npk = 0
+      let sp36 = 0
+      let organik = 0
+      let urea = 0
+      list.forEach((d: any) => {
+        const id = d.anggota_id
+        const tanggal = this.dateService.getDateFromTimestamp( d.tanggal)
+        if(a.tanggal == tanggal && a.id == id) {
+          let ar = this.getArrayPengambilan(d.pengambilan)
+          urea = this.ambilJumlahPupuk(ar, 'urea')
+          npk = this.ambilJumlahPupuk(ar, 'npk')
+          sp36 = this.ambilJumlahPupuk(ar, 'sp36')
+          za = this.ambilJumlahPupuk(ar, 'za')
+          organik = this.ambilJumlahPupuk(ar, 'organik')
+        }
+      })
+      newlist.push({
+        ...a,
+        urea:urea,
+        npk:npk,
+        za:za,
+        sp36:sp36,
+        organik:organik
+      })
+    })
+
+    
+
+    return newlist
+  }
+
+  getArrayPengambilan(pengambilanString: string) {
+    let ar = pengambilanString.split('Kg')
+    let result = []
+    ar.forEach(a => {
+      if(a.includes(':')) {
+        let replacedData = a.trim().replace(' ', '')
+        result.push(replacedData)
+      }
+    })
+    return result
+  }
+
+  ambilJumlahPupuk(data: Array<string>, pupuk: string = 'urea') : number {
+    let jumlah : number = 0
+
+    data.forEach(d => {
+      let ar = d.split('_')
+      if(ar[0].toLowerCase() == pupuk.toLowerCase()) {
+        let ax = ar[1].split(': ')
+        let j = parseInt(ax[1])
+        jumlah += j
+      }
+    })
+
+    return jumlah
+
+  }
+
   closeMe() {
     this.dialogRef.close();
   }
 
-  parseReport(r: string): string {
-    return r.replace('Kg ', 'Kg, ');
+  parsePengambilan(r: string): string {
+    let replacedText = r.replace('Kg', '~')
+    return replacedText;
   }
 
   printReport() {
@@ -46,6 +135,7 @@ export class ReportViewComponent implements OnInit {
       this.table.remove();
     }
     this.table = new TableExport(document.getElementById('datareport'), {
+
       headers: true, // (Boolean), display table headers (th or td elements) in the <thead>, (default: true)
       footers: true, // (Boolean), display table footers (th or td elements) in the <tfoot>, (default: false)
       formats: ['xlsx'], // (String[]), filetype(s) for the export, (default: ['xlsx', 'csv', 'txt'])
