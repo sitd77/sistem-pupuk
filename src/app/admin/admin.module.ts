@@ -13,6 +13,8 @@ import { AnggotaComponent } from './anggota/anggota.component';
 import { PermohonanComponent } from './permohonan/permohonan.component';
 import { PembagianPupukComponent } from './pembagian-pupuk/pembagian-pupuk.component';
 import { ProfilComponent } from './profil/profil.component';
+import { JumlahPupukComponent } from '../jumlah-pupuk/jumlah-pupuk.component';
+import { PupukItemComponent } from '../pupuk-item/pupuk-item.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { ProfilComponent } from './profil/profil.component';
     DetailPengajuanComponent,
     DataDistribusiComponent,
     ReportViewComponent,
+    JumlahPupukComponent,
+    PupukItemComponent,
   ],
   imports: [CommonModule, AdminRoutingModule, SharedModule],
 })

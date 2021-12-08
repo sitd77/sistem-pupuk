@@ -1,0 +1,44 @@
+.container {
+        border-radius: 5px;
+        background-color: #fff;       
+        padding: 1rem;
+        box-shadow: 4px 4px 10px rgba(0,0,0,.1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+
+        .data {
+                margin-right: 32px;
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+                &-value {
+                        color: #454545;
+                        font-size: 48px;
+                        font-weight: 700;
+                }
+                &-caption {
+                        align-self: flex-end;
+                        margin-left: 10px;
+                        font-size: 1rem;
+                        font-weight: 300;
+                        color: #868686;
+                }
+        }
+
+
+        .pupuk {
+                &-icon {
+                        height: 3rem;
+                        width: 3rem;
+                        object-fit: contain;
+                }
+
+                &-name {
+                        color: #C1C1C1;
+                        font-size: .9rem;
+                        text-transform: capitalize;
+                }
+        }
+}

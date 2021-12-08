@@ -1,0 +1,49 @@
+<div class="container">
+        <p *ngIf="isLoading" class="loading-text">Memuat data ...</p>
+        <table *ngIf="!isLoading" class="table">
+                <thead>
+                        <tr>
+                                <th>Pupuk</th>
+                                <th>Telah Keluar</th>
+                                <th>Jumlah Sekarang</th>
+                                <th>Total</th>
+                                <th>Aksi</th>
+                        </tr>
+                </thead>
+                <tbody>
+                        <tr *ngFor="let d of ourData;">
+                                <td>{{d.id}}</td>
+                                <td>{{d.keluar}} Kg</td>
+                                <td>{{d.sisa}} Kg</td>
+                                <td>{{d.total}} Kg</td>
+                                <td>
+                                        <button mat-icon-button color='primary' (click)="editItem(d)">
+                                                <mat-icon>edit</mat-icon>
+                                        </button>
+                                        
+                                </td>
+                        </tr>
+                </tbody>
+        </table>
+</div>
+
+
+
+
+<div class="form-container" [ngClass]="{'open': isFormOpen}">
+        <form [formGroup]="form">
+                <h3>Form Managemen Pupuk</h3>
+
+                <label for="total">Total</label>
+                <input type="number" placeholder="Total Pupuk (Kg)" id="total" formControlName="total" (keyup)="onKeyPress($event)">
+                <label for="keluar">Keluar</label>
+                <input type="number" placeholder="Pupuk yang keluar (Kg)" id="keluar" formControlName="keluar" (keyup)="onKeyPress($event)">
+                <label for="sisa">Sisa</label>
+                <input type="number" placeholder="Sisa Pupuk (Kg)" readonly id="sisa" formControlName="sisa">
+
+                <button mat-raised-button color='primary' (click)="submitEdit()">
+                        <mat-icon>save</mat-icon>
+                        Simpan
+                </button>
+        </form>
+</div>

@@ -12,6 +12,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { PermohonanPupukModel } from 'src/models/permohonan-model';
+import { TotalPupukService } from 'src/app/total-pupuk.service';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +33,7 @@ export class PermohonanService {
     private firestore: AngularFirestore,
     private usersService: UsersService,
     private dialog: SwalService,
+    private pupukService: TotalPupukService,
     private anggotaService: AnggotaService
   ) {
     // subscribe data changes
@@ -252,6 +254,9 @@ export class PermohonanService {
         pengambilan: report,
         tanggal: firebase.firestore.Timestamp.now(),
       });
+
+      // setelah submit report tambahkan update untuk stok pupuk
+      await this.pupukService.batchDataToUpdates(report),
 
       // log ketika sukses
       this.dialog.toastsuccess('Entri report berhasil.');

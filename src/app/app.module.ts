@@ -13,6 +13,7 @@ import {
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher,
 } from '@angular/material/core';
+import { TotalPupukService } from './total-pupuk.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +35,7 @@ import {
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
+    TotalPupukService,
   ],
   bootstrap: [AppComponent],
 })

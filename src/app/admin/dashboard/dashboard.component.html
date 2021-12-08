@@ -4,4 +4,20 @@
   <p class="description">
     Silahkan melakukan management data dengan baik dan benar !
   </p>
+
+
+  <div *ngIf="isToko" fxLayout="column" style="margin-top: 2rem;">
+
+    <h2 class="title" >Informasi Pupuk</h2>  
+    <p *ngIf="isLoading" class="loading-info">Memuat Info Pupuk ...</p>
+    <div *ngIf="!isLoading" style="display: flex;  flex-wrap: wrap; gap: 16px; justify-content: flex-start;">
+      <app-pupuk-item *ngFor="let d of ourData;" [value]='d.sisa.toString()' [pupuk]='d.id'></app-pupuk-item>
+      
+    </div>
+  
+    <h2 class="title" style="margin-top: 3.5rem;">Detail Data Pupuk</h2>  
+    <app-jumlah-pupuk></app-jumlah-pupuk>
+  </div>
+
+
 </div>
