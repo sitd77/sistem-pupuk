@@ -10,14 +10,14 @@ import { UserModel } from './../../../models/user-model';
 import { Subscription } from 'rxjs';
 import { PermohonanService } from './../../../services/permohonan.service';
 import { UsersService } from './../../../services/users.service';
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-permohonan',
   templateUrl: './permohonan.component.html',
   styleUrls: ['./permohonan.component.scss'],
 })
-export class PermohonanComponent implements OnInit, OnDestroy {
+export class PermohonanComponent implements OnInit, OnDestroy, AfterViewInit {
   // var's
   sub: Subscription;
   listKelompokTani: UserModel[];
@@ -60,6 +60,11 @@ export class PermohonanComponent implements OnInit, OnDestroy {
     public usersService: UsersService, // service untuk mendapatkan data users
     public service: PermohonanService // service untuk data permohonan pupuk
   ) {}
+
+  ngAfterViewInit(): void {
+      var controls = document.querySelectorAll('input[type="text"]')
+      console.log(controls)
+  }
 
   initData() {
     this.dialog.loading('Memuat data ...');

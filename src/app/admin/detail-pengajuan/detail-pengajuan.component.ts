@@ -2,7 +2,7 @@ import { Subscription } from 'rxjs';
 import { UserModel } from './../../../models/user-model';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { IPermohonan } from './../../../models/permohonan-model';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { DistribusiPupukModel } from 'src/models/permohonan-model';
@@ -16,7 +16,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './detail-pengajuan.component.html',
   styleUrls: ['./detail-pengajuan.component.scss'],
 })
-export class DetailPengajuanComponent implements OnInit {
+export class DetailPengajuanComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     'nomor',
     'nik',
@@ -46,6 +46,19 @@ export class DetailPengajuanComponent implements OnInit {
   currentData: IPermohonan;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  ngAfterViewInit(): void {
+    var controls = document.querySelectorAll<HTMLInputElement>('input[type="text"]')
+      controls.forEach(control => {
+        control.addEventListener('keypress', (e) => {
+          if(isNaN(parseInt(e.key))) {
+            e.preventDefault()
+          }
+          
+        })
+      })
+  }
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: UserModel,
